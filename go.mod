@@ -3,12 +3,14 @@ module github.com/go-skynet/intents
 go 1.19
 
 require (
+	github.com/PuerkitoBio/goquery v1.8.1
 	github.com/go-skynet/llama-cli v0.0.0-20230325001050-abee34f60a2a
 	github.com/onsi/ginkgo/v2 v2.9.2
 	github.com/onsi/gomega v1.27.5
 )
 
 require (
+	github.com/andybalholm/cascadia v1.3.1 // indirect
 	github.com/go-logr/logr v1.2.3 // indirect
 	github.com/go-task/slim-sprig v0.0.0-20230315185526-52ccab3ef572 // indirect
 	github.com/google/go-cmp v0.5.9 // indirect

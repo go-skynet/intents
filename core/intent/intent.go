@@ -1,4 +1,4 @@
-package intents
+package intent
 
 import (
 	"bytes"
@@ -27,7 +27,7 @@ func NewBaseIntent(s string) *Intent {
 	return &Intent{template: baseTemplate(s)}
 }
 
-func NewIntent(template string) *Intent {
+func New(template string) *Intent {
 	return &Intent{
 		template: template,
 	}
