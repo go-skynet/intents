@@ -14,11 +14,16 @@ var _ = Describe("Webpage intent", func() {
 		It("should return a web page summary", func() {
 			c := client.NewClient(apiAddress)
 			chain := &Chain{}
-			chain.Add(intents.NewWebScraper("https://kairos.io/community/"))
+			ws := func() *intents.ScrapeWeb { return intents.NewWebScraper("https://kairos.io/community/") }
+			chain.Add(ws())
 			chain.Add(intents.Summarize())
 			a, err := chain.Execute(c, client.WithTokens(99999))
 			Expect(err).ToNot(HaveOccurred())
-			Expect(a).To(ContainSubstring("Kairos is a community-driven project"))
+			// We can't really check the summary content as can be variadic, we just check that it's not the same page that we pass by
+			str, err := ws().Execute(nil)
+			Expect(err).ToNot(HaveOccurred())
+			Expect(str).To(ContainSubstring("Kairos"))
+			Expect(a).ToNot(Equal(str))
 		})
 	})
 })

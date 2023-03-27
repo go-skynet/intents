@@ -22,4 +22,16 @@ var _ = Describe("String intents", func() {
 			Expect(a).To(ContainSubstring("Yes"))
 		})
 	})
+	Context("Proofreading", func() {
+		It("should be able to proofread", func() {
+			c := client.NewClient(apiAddress)
+			chain := &Chain{}
+			input := "This is a very unsporious frivolus medal you got there my friend"
+			chain.Add(intents.StringIntent(input))
+			chain.Add(intents.Proofread())
+			a, err := chain.Execute(c, client.WithTokens(99999), client.WithTopK(10000))
+			Expect(err).ToNot(HaveOccurred())
+			Expect(a).NotTo(Equal(input))
+		})
+	})
 })

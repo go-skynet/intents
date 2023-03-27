@@ -5,6 +5,7 @@ import (
 	"text/template"
 
 	client "github.com/go-skynet/llama-cli/client"
+	"github.com/rs/zerolog/log"
 )
 
 const baseIntent = `
@@ -64,7 +65,13 @@ func (i *Intent) Execute(c *client.Client, opts ...client.InputOption) (string, 
 		return "", err
 	}
 
-	return c.Predict(str, opts...)
+	log.Printf("Sending intent prompt: %s", str)
+	resp, err := c.Predict(str, opts...)
+	log.Printf("API reply: %s", resp)
+	if err != nil {
+		log.Printf("API error: %s", err.Error())
+	}
+	return resp, err
 }
 
 func templateString(t string, in interface{}) (string, error) {

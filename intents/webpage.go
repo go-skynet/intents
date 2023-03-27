@@ -14,6 +14,10 @@ func NewWebScraper(s string) *ScrapeWeb {
 	return &ScrapeWeb{input: StringIntent(s)}
 }
 
+func Scrape() *ScrapeWeb {
+	return &ScrapeWeb{}
+}
+
 type ScrapeWeb struct {
 	input intent.IntentInput
 }
